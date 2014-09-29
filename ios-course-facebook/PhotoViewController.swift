@@ -45,9 +45,7 @@ class PhotoViewController: UIViewController {
         // change alpha to be clearer as dragging farther
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Changed) {
             photoView.center.y = originalCenter.y + translation.y
-//            view.backgroundColor = view.backgroundColor?.colorWithAlphaComponent( CGFloat (transformValue( Float( translation.y ), 0, 568, 1, 0.4) ) )
-//            view.backgroundColor = view.backgroundColor?.colorWithAlphaComponent(0.5)
-            view.alpha = CGFloat (transformValue( Float( translation.y ), 0, 568, 1, 0.4) )
+            view.backgroundColor = view.backgroundColor?.colorWithAlphaComponent( CGFloat (transformValue( Float( abs(translation.y) ), 0, 568, 0.9, 0.4) ) )
 
         // determine whether to return photo to place
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
@@ -59,6 +57,8 @@ class PhotoViewController: UIViewController {
                                   options: UIViewAnimationOptions.CurveEaseInOut,
                                animations: { () -> Void in
                         self.photoView.center.y = self.originalCenter.y
+                        self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(1)
+
                     }, completion: nil)
                 
             } else {
