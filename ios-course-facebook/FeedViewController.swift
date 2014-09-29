@@ -12,7 +12,7 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
 
     var isPresenting : Bool = true
     var imageView : UIImageView!
-    var photoView : PhotoViewController!
+    var expandView : UIImageView!
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var navView: UIImageView!
@@ -48,25 +48,38 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
         var containerView = transitionContext.containerView()
         var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
         var fromViewController = transitionContext.viewControllerForKey(UITransitionContextFromViewControllerKey)!
-        
         if (isPresenting) {
             containerView.addSubview(toViewController.view)
+
+            expandView = UIImageView(frame: imageView.frame)
+            expandView.image = imageView.image
+            println(expandView.frame)
+            containerView.addSubview(expandView)
+            expandView.contentMode = UIViewContentMode.ScaleAspectFill
+            expandView.clipsToBounds = true
+
             toViewController.view.alpha = 0
-            toViewController.view.frame = imageView.frame
-            
+            expandView.alpha = 1
+
             UIView.animateWithDuration(0.4, animations: { () -> Void in
+                self.expandView.frame = CGRect(x: 0, y: 57, width: 320, height: 440)
                 toViewController.view.alpha = 1
-                toViewController.view.frame = CGRect(x: 0, y: 0, width: 320, height: 568)
                 }) { (finished: Bool) -> Void in
+                    self.expandView.alpha = 0
                     transitionContext.completeTransition(true)
             }
 
+            
         } else {
+            println(transitionContext.initialFrameForViewController(fromViewController))
+            self.expandView.frame = transitionContext.initialFrameForViewController(fromViewController)
+            self.expandView.alpha = 1
+
             UIView.animateWithDuration(0.4, animations: { () -> Void in
-                fromViewController.view.frame = self.imageView.frame
-                println(self.imageView.frame)
+                fromViewController.view.alpha = 0
+                self.expandView.frame = self.imageView.frame
                 }) { (finished: Bool) -> Void in
-                    fromViewController.view.alpha = 0
+                    self.expandView.alpha = 0
                     transitionContext.completeTransition(true)
                     fromViewController.view.removeFromSuperview()
             }

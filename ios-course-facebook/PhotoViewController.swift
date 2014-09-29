@@ -28,15 +28,13 @@ class PhotoViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        photoView.image = photo
-        self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
+        self.photoView.hidden = true
     }
     
     override func viewDidAppear(animated: Bool) {
         UIView.animateWithDuration(0.1, animations: { () -> Void in
-            self.doneButtonView.alpha = 1
-            self.photoActionsView.alpha = 1
-            self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(1)
+            self.photoView.image = self.photo
+            self.photoView.hidden = false
         })
     }
 
@@ -76,13 +74,10 @@ class PhotoViewController: UIViewController {
                     }, completion: nil)
                 
             } else {
-                UIView.animateWithDuration(0.2, animations: { () -> Void in
-                    self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
-                    self.photoView.center.y = self.originalCenter.y
-                    self.view.frame = CGRectMake(self.photoView.frame.origin.x, self.photoView.frame.origin.y, self.photoView.image!.size.width, self.photoView.image!.size.height)
-                    }, completion: { (finished: Bool) -> Void in
-                        self.dismissViewControllerAnimated(true, completion: nil)
-                })
+                self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
+                self.view.frame = self.photoView.frame
+                self.photoView.center = self.view.center
+                self.dismissViewControllerAnimated(true, completion: nil)
             }
         }
     }
