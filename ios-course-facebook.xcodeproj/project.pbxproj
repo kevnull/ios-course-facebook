@@ -12,6 +12,8 @@
 		88E82A2F19CBC99D008C3F6D /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 88E82A2D19CBC99D008C3F6D /* Main.storyboard */; };
 		88E82A3119CBC99D008C3F6D /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 88E82A3019CBC99D008C3F6D /* Images.xcassets */; };
 		88E82A3D19CBC99D008C3F6D /* ios_course_facebookTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E82A3C19CBC99D008C3F6D /* ios_course_facebookTests.swift */; };
+		88E82A4719CBCC4D008C3F6D /* FeedViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E82A4619CBCC4D008C3F6D /* FeedViewController.swift */; };
+		88E82A4919CBCF71008C3F6D /* PhotoViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 88E82A4819CBCF71008C3F6D /* PhotoViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,6 +36,8 @@
 		88E82A3619CBC99D008C3F6D /* ios-course-facebookTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "ios-course-facebookTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		88E82A3B19CBC99D008C3F6D /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		88E82A3C19CBC99D008C3F6D /* ios_course_facebookTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ios_course_facebookTests.swift; sourceTree = "<group>"; };
+		88E82A4619CBCC4D008C3F6D /* FeedViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FeedViewController.swift; sourceTree = "<group>"; };
+		88E82A4819CBCF71008C3F6D /* PhotoViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PhotoViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -78,6 +82,8 @@
 				88E82A2919CBC99D008C3F6D /* AppDelegate.swift */,
 				88E82A2B19CBC99D008C3F6D /* ViewController.swift */,
 				88E82A2D19CBC99D008C3F6D /* Main.storyboard */,
+				88E82A4819CBCF71008C3F6D /* PhotoViewController.swift */,
+				88E82A4619CBCC4D008C3F6D /* FeedViewController.swift */,
 				88E82A3019CBC99D008C3F6D /* Images.xcassets */,
 				88E82A2719CBC99D008C3F6D /* Supporting Files */,
 			);
@@ -209,6 +215,8 @@
 			buildActionMask = 2147483647;
 			files = (
 				88E82A2C19CBC99D008C3F6D /* ViewController.swift in Sources */,
+				88E82A4919CBCF71008C3F6D /* PhotoViewController.swift in Sources */,
+				88E82A4719CBCC4D008C3F6D /* FeedViewController.swift in Sources */,
 				88E82A2A19CBC99D008C3F6D /* AppDelegate.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
