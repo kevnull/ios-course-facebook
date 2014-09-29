@@ -18,7 +18,9 @@ class PhotoViewController: UIViewController {
     var photo : UIImage!
     var originalCenter : CGPoint!
     
+    @IBOutlet weak var doneButtonView: UIButton!
     @IBOutlet weak var photoView: UIImageView!
+    @IBOutlet weak var photoActionsView: UIImageView!
 
     @IBAction func onDoneButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -27,6 +29,15 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         photoView.image = photo
+        self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
+    }
+    
+    override func viewDidAppear(animated: Bool) {
+        UIView.animateWithDuration(0.1, animations: { () -> Void in
+            self.doneButtonView.alpha = 1
+            self.photoActionsView.alpha = 1
+            self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(1)
+        })
     }
 
     override func didReceiveMemoryWarning() {
@@ -46,10 +57,12 @@ class PhotoViewController: UIViewController {
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Changed) {
             photoView.center.y = originalCenter.y + translation.y
             view.backgroundColor = view.backgroundColor?.colorWithAlphaComponent( CGFloat (transformValue( Float( abs(translation.y) ), 0, 568, 0.9, 0.4) ) )
+            self.doneButtonView.alpha = 0
+            self.photoActionsView.alpha = 0
 
         // determine whether to return photo to place
         } else if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
-            if (abs(translation.y) < 200) {
+            if (abs(translation.y) < 100) {
                 UIView.animateWithDuration(0.4,
                                     delay: 0,
                    usingSpringWithDamping: 1,
@@ -58,14 +71,19 @@ class PhotoViewController: UIViewController {
                                animations: { () -> Void in
                         self.photoView.center.y = self.originalCenter.y
                         self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(1)
-
+                        self.doneButtonView.alpha = 1
+                        self.photoActionsView.alpha = 1
                     }, completion: nil)
                 
             } else {
-                dismissViewControllerAnimated(true, completion: nil)
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
+                    self.photoView.center.y = self.originalCenter.y
+                    self.view.frame = CGRectMake(self.photoView.frame.origin.x, self.photoView.frame.origin.y, self.photoView.image!.size.width, self.photoView.image!.size.height)
+                    }, completion: { (finished: Bool) -> Void in
+                        self.dismissViewControllerAnimated(true, completion: nil)
+                })
             }
         }
     }
-    
-
 }

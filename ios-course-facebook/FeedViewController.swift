@@ -12,6 +12,7 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
 
     var isPresenting : Bool = true
     var imageView : UIImageView!
+    var photoView : PhotoViewController!
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var navView: UIImageView!
@@ -51,15 +52,21 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
         if (isPresenting) {
             containerView.addSubview(toViewController.view)
             toViewController.view.alpha = 0
+            toViewController.view.frame = imageView.frame
+            
             UIView.animateWithDuration(0.4, animations: { () -> Void in
                 toViewController.view.alpha = 1
+                toViewController.view.frame = CGRect(x: 0, y: 0, width: 320, height: 568)
                 }) { (finished: Bool) -> Void in
                     transitionContext.completeTransition(true)
             }
+
         } else {
             UIView.animateWithDuration(0.4, animations: { () -> Void in
-                fromViewController.view.alpha = 0
+                fromViewController.view.frame = self.imageView.frame
+                println(self.imageView.frame)
                 }) { (finished: Bool) -> Void in
+                    fromViewController.view.alpha = 0
                     transitionContext.completeTransition(true)
                     fromViewController.view.removeFromSuperview()
             }
