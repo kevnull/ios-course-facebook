@@ -13,6 +13,8 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
     var isPresenting : Bool = true
     var imageView : UIImageView!
     var expandView : UIImageView!
+    var photoNum : Int!
+    var weddingViews : [UIImageView]! = []
 
     @IBOutlet weak var scrollView: UIScrollView!
     @IBOutlet weak var navView: UIImageView!
@@ -74,22 +76,35 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
         } else {
             println(transitionContext.initialFrameForViewController(fromViewController))
             var fromScrollView = fromViewController as PhotoViewController
+            println("yo: \(Int(round(fromScrollView.scrollView.contentOffset.x / 320)))")
             
+            var newPhotoNum = Int(round(fromScrollView.scrollView.contentOffset.x / 320))
+            
+            // don't know how to reference the image to reveal if they pan
+            if (photoNum != newPhotoNum) {
+                self.imageView.hidden = false
+                photoNum = newPhotoNum
+            }
+            expandView.image = weddingViews[photoNum].image
+
             println(fromScrollView.photoView.frame.origin)
             println(fromScrollView.scrollView.contentOffset)
-            self.expandView.frame = CGRectMake(fromScrollView.photoView.frame.origin.x, fromScrollView.photoView.frame.origin.y - fromScrollView.scrollView.contentOffset.y, fromScrollView.photoView.frame.size.width, fromScrollView.photoView.frame.size.height)
+
+            self.expandView.frame = CGRectMake(0, fromScrollView.photoView.frame.origin.y - fromScrollView.scrollView.contentOffset.y, fromScrollView.photoView.frame.size.width, fromScrollView.photoView.frame.size.height)
             self.expandView.alpha = 1
             fromScrollView.photoView.hidden = true
+            self.imageView = weddingViews[photoNum]
 
             UIView.animateWithDuration(0.4, animations: { () -> Void in
                 self.expandView.frame = self.imageView.frame
                 fromViewController.view.alpha = 0
                 }) { (finished: Bool) -> Void in
-                    self.imageView.hidden = false
                     self.expandView.alpha = 0
+                    self.imageView.hidden = false
                     transitionContext.completeTransition(true)
                     fromViewController.view.removeFromSuperview()
             }
+            
         }
     }
     
@@ -99,27 +114,35 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
         scrollView.delegate = self
         scrollView.contentSize.width = feedView.frame.size.width
         scrollView.contentSize.height = navView.frame.size.height + feedView.frame.size.height
+        
+        weddingViews.append(wedding1View)
+        weddingViews.append(wedding2View)
+        weddingViews.append(wedding3View)
+        weddingViews.append(wedding4View)
+        weddingViews.append(wedding5View)
     }
 
     
     @IBAction func onTapPhoto(gestureRecognizer : UITapGestureRecognizer) {
 
         if (gestureRecognizer.view == self.wedding1View) {
-            self.imageView = wedding1View
-
+            self.photoNum = 0
+            
         } else if (gestureRecognizer.view == self.wedding2View) {
-            self.imageView = wedding2View
-
+            self.photoNum = 1
+            
         } else if (gestureRecognizer.view == self.wedding3View) {
-            self.imageView = wedding3View
+            self.photoNum = 2
 
         } else if (gestureRecognizer.view == self.wedding4View) {
-            self.imageView = wedding4View
+            self.photoNum = 3
 
         } else if (gestureRecognizer.view == self.wedding5View) {
-            self.imageView = wedding5View
-        }
+            self.photoNum = 4
 
+        }
+        self.imageView = self.weddingViews[photoNum]
+        println("photo: \(photoNum) \(imageView)")
         performSegueWithIdentifier("expandPhotoSegue", sender: self)
         
     }
@@ -129,10 +152,8 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
 
         var destinationViewController = segue.destinationViewController as PhotoViewController
 
-        if (imageView.image != nil) {
-            destinationViewController.photo = self.imageView.image
-        }
-
+        destinationViewController.photoNum = self.photoNum
+ 
         destinationViewController.modalPresentationStyle = UIModalPresentationStyle.Custom
         destinationViewController.transitioningDelegate = self
         

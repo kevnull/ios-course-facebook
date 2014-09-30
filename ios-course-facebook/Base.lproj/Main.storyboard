@@ -119,12 +119,32 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="i5p-ba-252">
-                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            <scrollView autoresizesSubviews="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" directionalLockEnabled="YES" bounces="NO" showsHorizontalScrollIndicator="NO" showsVerticalScrollIndicator="NO" id="i5p-ba-252">
+                                <rect key="frame" x="0.0" y="0.0" width="1600" height="568"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <subviews>
-                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding2" id="sE3-yy-Ii4" userLabel="Photo">
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding1" id="sE3-yy-Ii4" userLabel="Photo">
                                         <rect key="frame" x="0.0" y="64" width="320" height="440"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding2" id="cke-eh-npp" userLabel="Photo">
+                                        <rect key="frame" x="320" y="64" width="320" height="440"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding3" id="AkP-7C-kcA" userLabel="Photo">
+                                        <rect key="frame" x="640" y="64" width="320" height="440"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding4" id="C2Q-6b-6Th" userLabel="Photo">
+                                        <rect key="frame" x="960" y="64" width="320" height="440"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding5" id="GX9-z5-JuH" userLabel="Photo">
+                                        <rect key="frame" x="1280" y="64" width="320" height="440"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <gestureRecognizers/>
                                     </imageView>
@@ -151,7 +171,11 @@
                     <connections>
                         <outlet property="doneButtonView" destination="7tn-WB-iAj" id="y3y-YJ-PF1"/>
                         <outlet property="photoActionsView" destination="GC8-SA-rao" id="2UP-pA-kdo"/>
-                        <outlet property="photoView" destination="sE3-yy-Ii4" id="9zd-co-qyL"/>
+                        <outlet property="photoView1" destination="sE3-yy-Ii4" id="nXO-30-d1O"/>
+                        <outlet property="photoView2" destination="cke-eh-npp" id="1s4-qj-DxV"/>
+                        <outlet property="photoView3" destination="AkP-7C-kcA" id="209-4A-2qg"/>
+                        <outlet property="photoView4" destination="C2Q-6b-6Th" id="YXx-2e-MLf"/>
+                        <outlet property="photoView5" destination="GX9-z5-JuH" id="vI8-fn-XIF"/>
                         <outlet property="scrollView" destination="i5p-ba-252" id="h1J-GZ-1LL"/>
                     </connections>
                 </viewController>

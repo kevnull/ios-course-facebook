@@ -22,17 +22,91 @@
       <BreakpointProxy
          BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
          <BreakpointContent
-            shouldBeEnabled = "Yes"
+            shouldBeEnabled = "No"
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-course-facebook/FeedViewController.swift"
-            timestampString = "433745980.346798"
+            timestampString = "433748518.054873"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "76"
-            endingLineNumber = "76"
+            startingLineNumber = "78"
+            endingLineNumber = "78"
             landmarkName = "animateTransition(_:)"
             landmarkType = "5">
+         </BreakpointContent>
+      </BreakpointProxy>
+      <BreakpointProxy
+         BreakpointExtensionID = "Xcode.Breakpoint.FileBreakpoint">
+         <BreakpointContent
+            shouldBeEnabled = "No"
+            ignoreCount = "0"
+            continueAfterRunningActions = "No"
+            filePath = "ios-course-facebook/PhotoViewController.swift"
+            timestampString = "433748111.58396"
+            startingColumnNumber = "9223372036854775807"
+            endingColumnNumber = "9223372036854775807"
+            startingLineNumber = "31"
+            endingLineNumber = "31"
+            landmarkName = "PhotoViewController"
+            landmarkType = "3">
+            <Locations>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ios_course_facebook.PhotoViewController.photoViews.getter : Swift.ImplicitlyUnwrappedOptional&lt;Swift.Array&lt;ObjectiveC.UIImageView&gt;&gt;"
+                  moduleName = "ios-course-facebook"
+                  urlString = "file:///Users/kcheng/Dev/ios-course-facebook/ios-course-facebook/PhotoViewController.swift"
+                  timestampString = "433748170.414521"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "0"
+                  endingLineNumber = "0"
+                  offsetFromSymbolStart = "12">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ios_course_facebook.PhotoViewController.init (ios_course_facebook.PhotoViewController.Type)(nibName : Swift.Optional&lt;Swift.String&gt;, bundle : Swift.Optional&lt;ObjectiveC.NSBundle&gt;) -&gt; ios_course_facebook.PhotoViewController"
+                  moduleName = "ios-course-facebook"
+                  urlString = "file:///Users/kcheng/Dev/ios-course-facebook/ios-course-facebook/PhotoViewController.swift"
+                  timestampString = "433748170.415052"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "596">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ios_course_facebook.PhotoViewController.init (ios_course_facebook.PhotoViewController.Type)() -&gt; ios_course_facebook.PhotoViewController"
+                  moduleName = "ios-course-facebook"
+                  urlString = "file:///Users/kcheng/Dev/ios-course-facebook/ios-course-facebook/PhotoViewController.swift"
+                  timestampString = "433748170.415193"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "611">
+               </Location>
+               <Location
+                  shouldBeEnabled = "No"
+                  ignoreCount = "0"
+                  continueAfterRunningActions = "No"
+                  symbolName = "ios_course_facebook.PhotoViewController.init (ios_course_facebook.PhotoViewController.Type)(coder : ObjectiveC.NSCoder) -&gt; ios_course_facebook.PhotoViewController"
+                  moduleName = "ios-course-facebook"
+                  urlString = "file:///Users/kcheng/Dev/ios-course-facebook/ios-course-facebook/PhotoViewController.swift"
+                  timestampString = "433748170.415307"
+                  startingColumnNumber = "9223372036854775807"
+                  endingColumnNumber = "9223372036854775807"
+                  startingLineNumber = "31"
+                  endingLineNumber = "31"
+                  offsetFromSymbolStart = "619">
+               </Location>
+            </Locations>
          </BreakpointContent>
       </BreakpointProxy>
    </Breakpoints>
