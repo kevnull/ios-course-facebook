@@ -14,3 +14,4 @@ Assignment 4: Facebook Photo Viewer
 
 # Optional
 * The user should be able to page through the other photos in full screen mode.
+* When photo is dismissed after paging, photo returns to correct new position
