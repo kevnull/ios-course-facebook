@@ -119,20 +119,23 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding2" id="sE3-yy-Ii4" userLabel="Photo">
-                                <rect key="frame" x="0.0" y="57" width="320" height="440"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
-                                <gestureRecognizers/>
-                                <connections>
-                                    <outletCollection property="gestureRecognizers" destination="XGW-Ft-Z4z" appends="YES" id="vsF-s8-jWG"/>
-                                </connections>
-                            </imageView>
+                            <scrollView clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="scaleToFill" id="i5p-ba-252">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+                                <subviews>
+                                    <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding2" id="sE3-yy-Ii4" userLabel="Photo">
+                                        <rect key="frame" x="0.0" y="64" width="320" height="440"/>
+                                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                        <gestureRecognizers/>
+                                    </imageView>
+                                </subviews>
+                            </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo_actions" id="GC8-SA-rao">
-                                <rect key="frame" x="0.0" y="505" width="320" height="44"/>
+                                <rect key="frame" x="0.0" y="514" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" id="7tn-WB-iAj">
-                                <rect key="frame" x="260" y="20" width="51" height="27"/>
+                                <rect key="frame" x="261" y="29" width="51" height="27"/>
                                 <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                                 <state key="normal" image="doneButton">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -149,14 +152,10 @@
                         <outlet property="doneButtonView" destination="7tn-WB-iAj" id="y3y-YJ-PF1"/>
                         <outlet property="photoActionsView" destination="GC8-SA-rao" id="2UP-pA-kdo"/>
                         <outlet property="photoView" destination="sE3-yy-Ii4" id="9zd-co-qyL"/>
+                        <outlet property="scrollView" destination="i5p-ba-252" id="h1J-GZ-1LL"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHJ-WI-Ovq" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <panGestureRecognizer minimumNumberOfTouches="1" id="XGW-Ft-Z4z">
-                    <connections>
-                        <action selector="onPanPhoto:" destination="dYT-Df-Gjd" id="ZsE-LL-a9t"/>
-                    </connections>
-                </panGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-302" y="766"/>
         </scene>

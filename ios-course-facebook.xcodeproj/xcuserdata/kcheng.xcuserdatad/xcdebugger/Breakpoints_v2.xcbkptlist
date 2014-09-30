@@ -26,11 +26,11 @@
             ignoreCount = "0"
             continueAfterRunningActions = "No"
             filePath = "ios-course-facebook/FeedViewController.swift"
-            timestampString = "433678879.670456"
+            timestampString = "433745980.346798"
             startingColumnNumber = "9223372036854775807"
             endingColumnNumber = "9223372036854775807"
-            startingLineNumber = "75"
-            endingLineNumber = "75"
+            startingLineNumber = "76"
+            endingLineNumber = "76"
             landmarkName = "animateTransition(_:)"
             landmarkType = "5">
          </BreakpointContent>

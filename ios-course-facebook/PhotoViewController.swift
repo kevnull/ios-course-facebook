@@ -13,14 +13,15 @@ func transformValue (value : Float, x : Float, y : Float, a : Float, b: Float) -
     return (value/(y-x)*(b-a))+a
 }
 
-class PhotoViewController: UIViewController {
+class PhotoViewController: UIViewController, UIScrollViewDelegate {
 
     var photo : UIImage!
-    var originalCenter : CGPoint!
+    var originalPoint : CGPoint!
     
     @IBOutlet weak var doneButtonView: UIButton!
     @IBOutlet weak var photoView: UIImageView!
     @IBOutlet weak var photoActionsView: UIImageView!
+    @IBOutlet weak var scrollView: UIScrollView!
 
     @IBAction func onDoneButton(sender: AnyObject) {
         dismissViewControllerAnimated(true, completion: nil)
@@ -29,6 +30,11 @@ class PhotoViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         self.photoView.hidden = true
+        self.scrollView.delegate = self
+        self.scrollView.frame = CGRectMake(0, 0, 320, 568)
+        self.scrollView.contentSize = CGSizeMake(320, 1000)
+        originalPoint = self.scrollView.contentOffset
+        
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -43,42 +49,31 @@ class PhotoViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
-    @IBAction func onPanPhoto(gestureRecognizer : UIPanGestureRecognizer) {
-        var location = gestureRecognizer.locationInView(view)
-        var translation = gestureRecognizer.translationInView(view)
-        var x : CGFloat = photoView.frame.origin.x
-        
-        if (gestureRecognizer.state == UIGestureRecognizerState.Began) {
-            originalCenter = photoView.center
+    func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
+        var offset = Float(scrollView.contentOffset.y)
 
-        // change alpha to be clearer as dragging farther
-        } else if (gestureRecognizer.state == UIGestureRecognizerState.Changed) {
-            photoView.center.y = originalCenter.y + translation.y
-            view.backgroundColor = view.backgroundColor?.colorWithAlphaComponent( CGFloat (transformValue( Float( abs(translation.y) ), 0, 568, 0.9, 0.4) ) )
-            self.doneButtonView.alpha = 0
-            self.photoActionsView.alpha = 0
-
-        // determine whether to return photo to place
-        } else if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
-            if (abs(translation.y) < 100) {
-                UIView.animateWithDuration(0.4,
-                                    delay: 0,
-                   usingSpringWithDamping: 1,
-                    initialSpringVelocity: 1,
-                                  options: UIViewAnimationOptions.CurveEaseInOut,
-                               animations: { () -> Void in
-                        self.photoView.center.y = self.originalCenter.y
-                        self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(1)
-                        self.doneButtonView.alpha = 1
-                        self.photoActionsView.alpha = 1
-                    }, completion: nil)
-                
-            } else {
+        if (abs(offset) < 100) {
+            UIView.animateWithDuration(0.2, animations: { () -> Void in
+                self.scrollView.contentOffset = self.originalPoint
+                self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(1)
+                self.doneButtonView.alpha = 1
+                self.photoActionsView.alpha = 1
+            })
+        } else {
                 self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
-                self.view.frame = self.photoView.frame
-                self.photoView.center = self.view.center
                 self.dismissViewControllerAnimated(true, completion: nil)
-            }
         }
     }
+    
+    // any offset changes
+    func scrollViewDidScroll(scrollView: UIScrollView) {
+        var offset = Float(scrollView.contentOffset.y)
+        var alpha = CGFloat (transformValue( Float( abs(offset) ), 0, 300, 0.9, 0.4) )
+        view.backgroundColor = view.backgroundColor?.colorWithAlphaComponent( alpha )
+        UIView.animateWithDuration(0.2, animations: { () -> Void in
+            self.doneButtonView.alpha = 0
+            self.photoActionsView.alpha = 0
+        })
+    }
+
 }

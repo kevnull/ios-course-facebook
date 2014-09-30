@@ -60,9 +60,10 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
 
             toViewController.view.alpha = 0
             expandView.alpha = 1
+            imageView.hidden = true
 
             UIView.animateWithDuration(0.4, animations: { () -> Void in
-                self.expandView.frame = CGRect(x: 0, y: 57, width: 320, height: 440)
+                self.expandView.frame = CGRect(x: 0, y: 64, width: 320, height: 440)
                 toViewController.view.alpha = 1
                 }) { (finished: Bool) -> Void in
                     self.expandView.alpha = 0
@@ -72,13 +73,19 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
             
         } else {
             println(transitionContext.initialFrameForViewController(fromViewController))
-            self.expandView.frame = transitionContext.initialFrameForViewController(fromViewController)
+            var fromScrollView = fromViewController as PhotoViewController
+            
+            println(fromScrollView.photoView.frame.origin)
+            println(fromScrollView.scrollView.contentOffset)
+            self.expandView.frame = CGRectMake(fromScrollView.photoView.frame.origin.x, fromScrollView.photoView.frame.origin.y - fromScrollView.scrollView.contentOffset.y, fromScrollView.photoView.frame.size.width, fromScrollView.photoView.frame.size.height)
             self.expandView.alpha = 1
+            fromScrollView.photoView.hidden = true
 
             UIView.animateWithDuration(0.4, animations: { () -> Void in
-                fromViewController.view.alpha = 0
                 self.expandView.frame = self.imageView.frame
+                fromViewController.view.alpha = 0
                 }) { (finished: Bool) -> Void in
+                    self.imageView.hidden = false
                     self.expandView.alpha = 0
                     transitionContext.completeTransition(true)
                     fromViewController.view.removeFromSuperview()
