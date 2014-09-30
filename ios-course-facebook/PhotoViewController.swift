@@ -95,6 +95,7 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
                 self.photoView.frame.origin = CGPointMake(0, 64)
                 self.doneButtonView.alpha = 1
                 self.photoActionsView.alpha = 1
+                self.scrollView.contentOffset = self.originalPoint
                 }, completion: nil)
         } else {
             let pointInView = recognizer.locationInView(photoView)
@@ -112,17 +113,20 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
         let offset = scrollView.contentOffset
+
+        if (CGAffineTransformIsIdentity(photoView.transform)) {
         
-        if (abs(offset.y) < 100) {
-            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                self.scrollView.contentOffset = self.originalPoint
-                self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(1)
-                self.doneButtonView.alpha = 1
-                self.photoActionsView.alpha = 1
-            })
-        } else {
-                self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
-                self.dismissViewControllerAnimated(true, completion: nil)
+            if (abs(offset.y) < 100) {
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.scrollView.contentOffset = self.originalPoint
+                    self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(1)
+                    self.doneButtonView.alpha = 1
+                    self.photoActionsView.alpha = 1
+                })
+            } else {
+                    self.view.backgroundColor = self.view.backgroundColor?.colorWithAlphaComponent(0)
+                    self.dismissViewControllerAnimated(true, completion: nil)
+            }
         }
     }
     
@@ -131,18 +135,21 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         let offset = scrollView.contentOffset
         let alpha = CGFloat (transformValue( Float( abs(offset.y) ), 0, 300, 0.9, 0.4) )
 
-        if (abs(offset.x - originalPoint.x) > 0) {
-            scrollView.pagingEnabled = true
-            originalPoint.x = scrollView.contentOffset.x
-            photoNum = Int(round(scrollView.contentOffset.x / 320))
-            photoView = photoViews[photoNum]
-        } else {
-            scrollView.pagingEnabled = false
-            view.backgroundColor = view.backgroundColor?.colorWithAlphaComponent( alpha )
-            UIView.animateWithDuration(0.2, animations: { () -> Void in
-                self.doneButtonView.alpha = 0
-                self.photoActionsView.alpha = 0
-            })
+        if (CGAffineTransformIsIdentity(photoView.transform)) {
+        
+            if (abs(offset.x - originalPoint.x) > 0) {
+                scrollView.pagingEnabled = true
+                originalPoint.x = scrollView.contentOffset.x
+                photoNum = Int(round(scrollView.contentOffset.x / 320))
+                photoView = photoViews[photoNum]
+            } else {
+                scrollView.pagingEnabled = false
+                view.backgroundColor = view.backgroundColor?.colorWithAlphaComponent( alpha )
+                UIView.animateWithDuration(0.2, animations: { () -> Void in
+                    self.doneButtonView.alpha = 0
+                    self.photoActionsView.alpha = 0
+                })
+            }
         }
     }
 
