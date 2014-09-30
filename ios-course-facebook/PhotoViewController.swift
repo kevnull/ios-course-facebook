@@ -50,17 +50,14 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         self.scrollView.frame = CGRectMake(0, 0, 320, 568)
         self.scrollView.contentSize = CGSizeMake(1600, 1000)
         self.scrollView.contentOffset.x = CGFloat (photoNum) * 320
-        println("1 originalPoint = \(originalPoint)")
-        
         
         var doubleTapRecognizer = UITapGestureRecognizer(target: self, action: "scrollViewDoubleTapped:")
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.numberOfTouchesRequired = 1
         scrollView.addGestureRecognizer(doubleTapRecognizer)
         
-        let scrollViewFrame = scrollView.frame
-        let scaleWidth = scrollViewFrame.size.width / scrollView.contentSize.width
-        let scaleHeight = scrollViewFrame.size.height / scrollView.contentSize.height
+        let scaleWidth = scrollView.frame.size.width / photoView.image!.size.width
+        let scaleHeight = scrollView.frame.size.height / photoView.image!.size.height
         let minScale = min(scaleWidth, scaleHeight);
         scrollView.minimumZoomScale = minScale;
         
@@ -79,6 +76,44 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    func centerScrollViewContents() {
+        let boundsSize = scrollView.bounds.size
+        var contentsFrame = photoView.frame
+        
+        if contentsFrame.size.width < boundsSize.width {
+            contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0
+        } else {
+            contentsFrame.origin.x = 0.0
+        }
+        
+        if contentsFrame.size.height < boundsSize.height {
+            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0
+        } else {
+            contentsFrame.origin.y = 0.0
+        }
+        
+        photoView.frame = contentsFrame
+    }
+
+    func scrollViewDoubleTapped(recognizer: UITapGestureRecognizer) {
+        println("yo")
+        let pointInView = recognizer.locationInView(photoView)
+        
+        var newZoomScale = scrollView.zoomScale * 1.5
+        newZoomScale = min(newZoomScale, scrollView.maximumZoomScale)
+        
+        let scrollViewSize = scrollView.bounds.size
+        let w = scrollViewSize.width / newZoomScale
+        let h = scrollViewSize.height / newZoomScale
+        let x = pointInView.x - (w / 2.0)
+        let y = pointInView.y - (h / 2.0)
+        
+        let rectToZoomTo = CGRectMake(x, y, w, h);
+        
+        // 4
+        scrollView.zoomToRect(rectToZoomTo, animated: true)
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
@@ -101,7 +136,7 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     func scrollViewDidScroll(scrollView: UIScrollView) {
         var offset = scrollView.contentOffset
         var alpha = CGFloat (transformValue( Float( abs(offset.y) ), 0, 300, 0.9, 0.4) )
-        println("scroll offset = \(offset) and originalPoint = \(originalPoint)")
+
         if (abs(offset.x - originalPoint.x) > 0) {
             scrollView.pagingEnabled = true
             originalPoint.x = scrollView.contentOffset.x

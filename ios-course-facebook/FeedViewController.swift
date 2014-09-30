@@ -44,8 +44,6 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
 
     
     func animateTransition(transitionContext: UIViewControllerContextTransitioning) {
-
-        println("animating transition: \(isPresenting)")
         
         var containerView = transitionContext.containerView()
         var toViewController = transitionContext.viewControllerForKey(UITransitionContextToViewControllerKey)!
@@ -55,7 +53,7 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
 
             expandView = UIImageView(frame: imageView.frame)
             expandView.image = imageView.image
-            println(expandView.frame)
+
             containerView.addSubview(expandView)
             expandView.contentMode = UIViewContentMode.ScaleAspectFill
             expandView.clipsToBounds = true
@@ -74,9 +72,8 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
 
             
         } else {
-            println(transitionContext.initialFrameForViewController(fromViewController))
+
             var fromScrollView = fromViewController as PhotoViewController
-            println("yo: \(Int(round(fromScrollView.scrollView.contentOffset.x / 320)))")
             
             var newPhotoNum = Int(round(fromScrollView.scrollView.contentOffset.x / 320))
             
@@ -86,9 +83,6 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
                 photoNum = newPhotoNum
             }
             expandView.image = weddingViews[photoNum].image
-
-            println(fromScrollView.photoView.frame.origin)
-            println(fromScrollView.scrollView.contentOffset)
 
             self.expandView.frame = CGRectMake(0, fromScrollView.photoView.frame.origin.y - fromScrollView.scrollView.contentOffset.y, fromScrollView.photoView.frame.size.width, fromScrollView.photoView.frame.size.height)
             self.expandView.alpha = 1
@@ -142,7 +136,7 @@ class FeedViewController: UIViewController, UIScrollViewDelegate, UIViewControll
 
         }
         self.imageView = self.weddingViews[photoNum]
-        println("photo: \(photoNum) \(imageView)")
+
         performSegueWithIdentifier("expandPhotoSegue", sender: self)
         
     }

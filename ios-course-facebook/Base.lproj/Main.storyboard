@@ -149,6 +149,7 @@
                                         <gestureRecognizers/>
                                     </imageView>
                                 </subviews>
+                                <gestureRecognizers/>
                             </scrollView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="photo_actions" id="GC8-SA-rao">
                                 <rect key="frame" x="0.0" y="514" width="320" height="44"/>
