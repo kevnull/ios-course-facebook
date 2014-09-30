@@ -127,16 +127,25 @@
                                         <rect key="frame" x="0.0" y="64" width="320" height="440"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JZx-xe-Dto" appends="YES" id="ZJU-Sj-U1O"/>
+                                        </connections>
                                     </imageView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding2" id="cke-eh-npp" userLabel="Photo">
                                         <rect key="frame" x="320" y="64" width="320" height="440"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JZx-xe-Dto" appends="YES" id="Mxk-Yd-HWB"/>
+                                        </connections>
                                     </imageView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding3" id="AkP-7C-kcA" userLabel="Photo">
                                         <rect key="frame" x="640" y="64" width="320" height="440"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JZx-xe-Dto" appends="YES" id="vRE-jI-maZ"/>
+                                        </connections>
                                     </imageView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding4" id="C2Q-6b-6Th" userLabel="Photo">
                                         <rect key="frame" x="960" y="64" width="320" height="440"/>
@@ -181,6 +190,11 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="CHJ-WI-Ovq" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <pinchGestureRecognizer id="JZx-xe-Dto">
+                    <connections>
+                        <action selector="photoPinchZoomGesture:" destination="dYT-Df-Gjd" id="xmz-XD-SV2"/>
+                    </connections>
+                </pinchGestureRecognizer>
             </objects>
             <point key="canvasLocation" x="-302" y="766"/>
         </scene>

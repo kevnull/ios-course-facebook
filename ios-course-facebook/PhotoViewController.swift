@@ -55,16 +55,6 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         doubleTapRecognizer.numberOfTapsRequired = 2
         doubleTapRecognizer.numberOfTouchesRequired = 1
         scrollView.addGestureRecognizer(doubleTapRecognizer)
-        
-        let scaleWidth = scrollView.frame.size.width / photoView.image!.size.width
-        let scaleHeight = scrollView.frame.size.height / photoView.image!.size.height
-        let minScale = min(scaleWidth, scaleHeight);
-        scrollView.minimumZoomScale = minScale;
-        
-        scrollView.maximumZoomScale = 1.0
-        scrollView.zoomScale = minScale;
-        
-        centerScrollViewContents()
     }
     
     override func viewDidAppear(animated: Bool) {
@@ -77,47 +67,51 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
-    
-    func centerScrollViewContents() {
-        let boundsSize = scrollView.bounds.size
-        var contentsFrame = photoView.frame
-        
-        if contentsFrame.size.width < boundsSize.width {
-            contentsFrame.origin.x = (boundsSize.width - contentsFrame.size.width) / 2.0
-        } else {
-            contentsFrame.origin.x = 0.0
-        }
-        
-        if contentsFrame.size.height < boundsSize.height {
-            contentsFrame.origin.y = (boundsSize.height - contentsFrame.size.height) / 2.0
-        } else {
-            contentsFrame.origin.y = 0.0
-        }
-        
-        photoView.frame = contentsFrame
-    }
 
+    @IBAction func photoPinchZoomGesture(gestureRecognizer: UIPinchGestureRecognizer) {
+        if (gestureRecognizer.state == UIGestureRecognizerState.Changed) {
+            photoView.transform = CGAffineTransformMakeScale(gestureRecognizer.scale, gestureRecognizer.scale)
+            UIView.animateWithDuration(0.1, animations: { () -> Void in
+                self.doneButtonView.alpha = 0
+                self.photoActionsView.alpha = 0
+            }, completion: nil)
+        } else if (gestureRecognizer.state == UIGestureRecognizerState.Ended) {
+            if (gestureRecognizer.scale < 1) {
+                UIView.animateWithDuration(0.1, animations: { () -> Void in
+                    self.photoView.transform = CGAffineTransformIdentity
+                    self.doneButtonView.alpha = 1
+                    self.photoActionsView.alpha = 1
+                }, completion: nil)
+            }
+            
+        }
+    }
+    
     func scrollViewDoubleTapped(recognizer: UITapGestureRecognizer) {
         println("yo")
-        let pointInView = recognizer.locationInView(photoView)
-        
-        var newZoomScale = scrollView.zoomScale * 1.5
-        newZoomScale = min(newZoomScale, scrollView.maximumZoomScale)
-        
-        let scrollViewSize = scrollView.bounds.size
-        let w = scrollViewSize.width / newZoomScale
-        let h = scrollViewSize.height / newZoomScale
-        let x = pointInView.x - (w / 2.0)
-        let y = pointInView.y - (h / 2.0)
-        
-        let rectToZoomTo = CGRectMake(x, y, w, h);
-        
-        // 4
-        scrollView.zoomToRect(rectToZoomTo, animated: true)
+        if (!CGAffineTransformIsIdentity(photoView.transform)) {
+            UIView.animateWithDuration(0.1, animations: { () -> Void in
+                self.photoView.transform = CGAffineTransformIdentity
+                self.photoView.frame.origin = CGPointMake(0, 64)
+                self.doneButtonView.alpha = 1
+                self.photoActionsView.alpha = 1
+                }, completion: nil)
+        } else {
+            let pointInView = recognizer.locationInView(photoView)
+            let x = pointInView.x - (self.photoView.frame.size.width / 2.0)
+            let y = pointInView.y - (self.photoView.frame.size.height / 2.0)
+            UIView.animateWithDuration(0.1, animations: { () -> Void in
+                self.photoView.frame.origin = CGPointMake(x, y)
+                self.photoView.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                self.doneButtonView.alpha = 0
+                self.photoActionsView.alpha = 0
+            }, completion: nil)
+
+        }
     }
     
     func scrollViewDidEndDragging(scrollView: UIScrollView, willDecelerate decelerate: Bool) {
-        var offset = scrollView.contentOffset
+        let offset = scrollView.contentOffset
         
         if (abs(offset.y) < 100) {
             UIView.animateWithDuration(0.2, animations: { () -> Void in
@@ -134,8 +128,8 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
     
     // any offset changes
     func scrollViewDidScroll(scrollView: UIScrollView) {
-        var offset = scrollView.contentOffset
-        var alpha = CGFloat (transformValue( Float( abs(offset.y) ), 0, 300, 0.9, 0.4) )
+        let offset = scrollView.contentOffset
+        let alpha = CGFloat (transformValue( Float( abs(offset.y) ), 0, 300, 0.9, 0.4) )
 
         if (abs(offset.x - originalPoint.x) > 0) {
             scrollView.pagingEnabled = true
