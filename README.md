@@ -15,3 +15,9 @@ Assignment 4: Facebook Photo Viewer
 # Optional
 * The user should be able to page through the other photos in full screen mode.
 * When photo is dismissed after paging, photo returns to correct new position
+* Pinch to zoom
+* Double tap to zoom to location
+* Double tap while zoomed to unzoom
+* Zooming smaller than default will pop back
+* Zooming makes dismiss and photo actions fade
+* While zoomed in, scrolling will not dismiss but pan instead
