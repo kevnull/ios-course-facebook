@@ -92,18 +92,17 @@ class PhotoViewController: UIViewController, UIScrollViewDelegate {
         if (!CGAffineTransformIsIdentity(photoView.transform)) {
             UIView.animateWithDuration(0.1, animations: { () -> Void in
                 self.photoView.transform = CGAffineTransformIdentity
-                self.photoView.frame.origin = CGPointMake(0, 64)
+                self.photoView.frame.origin = CGPointMake(self.originalPoint.x, 64)
                 self.doneButtonView.alpha = 1
                 self.photoActionsView.alpha = 1
-                self.scrollView.contentOffset = self.originalPoint
                 }, completion: nil)
         } else {
             let pointInView = recognizer.locationInView(photoView)
             let x = pointInView.x - (self.photoView.frame.size.width / 2.0)
             let y = pointInView.y - (self.photoView.frame.size.height / 2.0)
             UIView.animateWithDuration(0.1, animations: { () -> Void in
-                self.photoView.frame.origin = CGPointMake(x, y)
-                self.photoView.transform = CGAffineTransformMakeScale(1.5, 1.5)
+                self.photoView.frame.origin = CGPointMake(x+self.originalPoint.x, y)
+                self.photoView.transform = CGAffineTransformMakeScale(2.0, 2.0)
                 self.doneButtonView.alpha = 0
                 self.photoActionsView.alpha = 0
             }, completion: nil)

@@ -151,11 +151,17 @@
                                         <rect key="frame" x="960" y="64" width="320" height="440"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JZx-xe-Dto" appends="YES" id="aPQ-Qv-YrS"/>
+                                        </connections>
                                     </imageView>
                                     <imageView clipsSubviews="YES" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="wedding5" id="GX9-z5-JuH" userLabel="Photo">
                                         <rect key="frame" x="1280" y="64" width="320" height="440"/>
                                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                         <gestureRecognizers/>
+                                        <connections>
+                                            <outletCollection property="gestureRecognizers" destination="JZx-xe-Dto" appends="YES" id="h2m-zC-MKU"/>
+                                        </connections>
                                     </imageView>
                                 </subviews>
                                 <gestureRecognizers/>
